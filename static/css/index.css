@@ -27,6 +27,10 @@ body {
   font-family: 'Google Sans', sans-serif;
 }
 
+.center-image {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+}
 
 .publication-title {
 }
