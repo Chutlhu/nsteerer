@@ -1,0 +1,62 @@
+data:
+  fs: 48000
+  n_rfft: 257
+  n_frames: 30
+  n_mics: 1
+  max_order: 10
+  absorption: 0.9
+  room_dim: [6, 7, 4]
+  normalize_coords: False
+
+training:
+  seed: 666
+  epochs: 1000
+  batch_size: 12
+  early_stop: no
+  half_lr: yes
+  train_idx: 
+    az: [0, -1, 2]
+    el: [0, -1, 2] # azimutal plane: [9, 11, 2]
+    # el: [9, 11, 2]
+  train_val_split_perc: 95
+  train_for_val: False
+  num_workers: 4
+  precision: 32
+  check_val_every_n_epoch: 25
+
+model:
+  do_freqs_in: False
+  in_dim: 2
+  out_dim: 5 # 2(1+nmics)+1
+  architecture: SIREN
+  data_range: 1.
+  hidden_dim : 1024
+  hidden_num : 2
+  inner_actif: sin
+  feature_dim: 1024
+  feature_scale_ang : 32
+  feature_scale_freq : 32
+  freq_masking: False
+  freq_range: [200, 20000]
+  do_svect: True
+  do_bar  : False
+  do_delay: False
+
+loss:
+  loss_mag : 1
+  loss_mag_fun: "l1"  
+  loss_mag_scale: "log"
+  loss_phase: 1
+  loss_phase_fun: "l2"
+  loss_air : 10
+  loss_air_fun : "l1" #"logcosh"
+  loss_air_ndoas: 360
+  loss_air_nsmpl: 300
+  loss_causality: 0
+  loss_causality_crit: "hilbert"
+  loss_causality_fun: "l1"
+
+optim:
+  optim_config_dict:
+    lr: 0.0001
+    weight_decay: 0
